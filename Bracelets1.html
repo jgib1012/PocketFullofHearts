@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Pocket Full of Hearts - Bracelets"/>
+  <title>Bracelets - Pocket Full of Hearts</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fdf2f8;
+    }
+
+    nav {
+      background-color: black;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav ul li a:hover { 
+      background-color: white; 
+      color: black; 
+      padding: 5px 10px; 
+      border-radius: 5px; 
+    }
+
+    header {
+      background: linear-gradient(to right, #ffe0ec, #fddde6);
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 60px;
+      margin: 0;
+    }
+
+    .product-container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .product-container img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .product-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 20px 0 10px;
+    }
+
+    .product-price {
+      font-size: 20px;
+      color: #fc94af;
+      margin-bottom: 20px;
+    }
+
+    .add-to-cart-btn {
+      background-color: #fc94af;
+      color: white;
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: black;
+    }
+
+    .product-options {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    select, input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clothes.html">Clothes</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="ContactUs.html">Contact</a></li>
+      <li><a href="cart.html" id="cartLink">🛒 Cart</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Signature Heart Bracelet</h1>
+  </header>
+
+  <div class="product-container">
+    <img src="images/bracelet1.jpg" alt="Heart Bracelet" />
+    <h2 class="product-title">Signature Heart Bracelet</h2>
+    <p class="product-price">$12.99</p>
+    <p>Delicate handmade bracelet with heart charm — available in multiple colors for every vibe.</p>
+
+    <div class="product-options">
+      <select id="size">
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+      </select>
+
+      <select id="color">
+        <option value="Pink">Pink</option>
+        <option value="Black">Black</option>
+        <option value="Silver">Silver</option>
+      </select>
+
+      <input type="number" id="quantity" value="1" min="1" />
+    </div>
+
+    <button class="add-to-cart-btn">Add to Cart</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Pocket Full of Hearts. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      function updateCartBadge() {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartLink = document.getElementById("cartLink");
+
+        if (count > 0) {
+          cartLink.innerHTML = `🛒 Cart <span style="
+            background:#fc94af;
+            color:white;
+            padding:2px 8px;
+            border-radius:12px;
+            font-size:14px;
+            margin-left:6px;
+          ">${count}</span>`;
+        }
+      }
+
+      updateCartBadge();
+
+      document.querySelector(".add-to-cart-btn").addEventListener("click", function () {
+
+        const size = document.getElementById("size").value;
+        const color = document.getElementById("color").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+
+        if (!size || !color || quantity < 1) {
+          alert("Please select size, color, and a valid quantity.");
+          return;
+        }
+
+        const item = {
+          name: "Signature Heart Bracelet",
+          size,
+          color,
+          quantity,
+          price: 12.99,
+          image: "images/bracelet1.jpg"
+        };
+
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+        const existing = cart.find(i =>
+          i.name === item.name &&
+          i.size === item.size &&
+          i.color === item.color
+        );
+
+        if (existing) {
+          existing.quantity += item.quantity;
+        } else {
+          cart.push(item);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartBadge();
+
+        alert("Item added to cart!");
+        window.location.href = "cart.html";
+      });
+
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pocket Full of Hearts - Product Page" />
+  <title>Signature T-Shirt - Pocket Full of Hearts</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    nav {
+      background-color: black;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav ul li a:hover { 
+      background-color: white; 
+      color: black; 
+      padding: 5px 10px; 
+      border-radius: 5px; 
+    }
+
+    .product-container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    .product-image img {
+      width: 100%;
+      max-width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      margin: auto;
+    }
+
+    .product-details label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .product-details select,
+    .product-details input {
+      padding: 8px;
+      width: 100%;
+      max-width: 200px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .add-to-cart-btn {
+      margin-top: 20px;
+      background-color: #FC94AF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: black;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clothes.html">Clothes</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="ContactUs.html">Contact</a></li>
+      <li><a href="cart.html" id="cartLink">🛒 Cart</a></li>
+    </ul>
+  </nav>
+
+  <div class="product-container">
+    <h1>Signature T-Shirt</h1>
+
+    <div class="product-image">
+      <img src="images/tshirt1.jpg" alt="Signature T-Shirt" />
+    </div>
+
+    <p><strong>Price:</strong> $28.00</p>
+
+    <form class="product-details" id="cartForm">
+      <label for="size">Size</label>
+      <select id="size" name="size" required>
+        <option value="">--Select Size--</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">XL</option>
+      </select>
+
+      <label for="color">Color</label>
+      <select id="color" name="color" required>
+        <option value="">--Select Color--</option>
+        <option value="pink">Pink</option>
+        <option value="white">White</option>
+        <option value="black">Black</option>
+      </select>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" value="1" min="1" required />
+
+      <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+    </form>
+
+    <div id="paypal-button-container" style="margin-top: 30px;"></div>
+
+    <a href="clothes.html" style="display:block;margin-top:30px;color:#fc94af;text-decoration:underline;">
+      ← Back to Clothes
+    </a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Pocket Full of Hearts. All rights reserved.</p>
+  </footer>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_REAL_CLIENT_ID&components=buttons,funding-eligibility&enable-funding=venmo,card,applepay,googlepay&currency=USD"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      function updateCartBadge() {
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartLink = document.getElementById("cartLink");
+
+        if (count > 0) {
+          cartLink.innerHTML = `🛒 Cart <span style="
+            background:#fc94af;
+            color:white;
+            padding:2px 8px;
+            border-radius:12px;
+            font-size:14px;
+            margin-left:6px;
+          ">${count}</span>`;
+        }
+      }
+
+      updateCartBadge();
+
+      const form = document.getElementById("cartForm");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const size = document.getElementById("size").value;
+        const color = document.getElementById("color").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+
+        if (!size || !color || quantity < 1) {
+          alert("Please select size, color, and a valid quantity.");
+          return;
+        }
+
+        const item = {
+          name: "Signature T-Shirt",
+          size,
+          color,
+          quantity,
+          price: 28.00,
+          image: "images/tshirt1.jpg"
+        };
+
+        let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+        const existing = cart.find(i =>
+          i.name === item.name &&
+          i.size === item.size &&
+          i.color === item.color
+        );
+
+        if (existing) {
+          existing.quantity += item.quantity;
+        } else {
+          cart.push(item);
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartBadge();
+
+        alert("Item added to cart!");
+        window.location.href = "cart.html";
+      });
+
+      paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: { value: '28.00' }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+        }
+      }).render('#paypal-button-container');
+
+    });
+  </script>
+
+</body>
+</html>

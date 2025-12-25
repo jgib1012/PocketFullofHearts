@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: black; /* All text is black */
+    background-color: #e0e0e0; /* Light gray background */
+}
+
+nav {
+    background-color: black; /* White navbar */
+    padding: 15px;
+}
+/* #FC94AF; */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+body {
+    background-image: url("images/pocketfullofhearts1.png"); /* your JPEG file */
+    background-repeat: repeat;
+    background-size: contain; /* or try 'auto' or '100px' depending on style */
+    background-attachment: fixed;
+  }
+  
+
+nav ul li a {
+    color: white; /* Change from white to black text */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background-color: #f1e9d2;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}

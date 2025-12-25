@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Pocket Full of Hearts - Contact Us"/>
+  <title>Pocket Full of Hearts - Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    nav {
+      background: linear-gradient(to right, black, black);
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav ul li a:hover { 
+      background-color: white; 
+      color: black; 
+      padding: 5px 10px; 
+      border-radius: 5px; 
+    }
+
+    header {
+      background-color: #f8dce3;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 60px;
+      margin: 0;
+      color: black;
+    }
+
+    /* Social Bar */
+    .social-bar {
+      text-align: center;
+      padding: 12px;
+      background-color: #ffe0ec;
+    }
+
+    .social-bar a {
+      color: black;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .social-bar a:hover {
+      text-decoration: underline;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    button {
+      background-color: #FC94AF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: black;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clothes.html">Clothes</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="ContactUs.html">Contact</a></li>
+      <li><a href="cart.html">🛒</a></li>
+    </ul>
+  </nav>
+  
+  <header style="background: linear-gradient(to right, #ffe0ec, #fddde6); text-align: center; padding: 60px 20px;">
+    <h1 style="font-family: 'Great Vibes', cursive; font-size: 60px; margin: 0; color: black;">Reach Out to Us</h1>
+  </header>
+
+  <!-- Social Bar -->
+  <div class="social-bar">
+    <a href="https://facebook.com/YourPageName" target="_blank">
+      <img src="images/Facebook_Logo_2023.png" alt="Facebook" style="height:28px;">
+    </a>
+  </div>
+  
+
+  <div class="form-container">
+    <form>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" placeholder="John" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+        </div>
+      </div>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="example@email.com" required>
+
+      <label for="comments">Comments</label>
+      <textarea id="comments" name="comments" rows="5" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Pocket Full of Hearts. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Pocket Full of Hearts - Accessories"/>
+  <title>Pocket Full of Hearts - Accessories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe0ec;
+      margin: 0;
+      padding: 0;
+      color: black;
+    }
+    
+    nav {
+      background-color: black;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav ul li a:hover { 
+      background-color: white; 
+      color: black; 
+      padding: 5px 10px; 
+      border-radius: 5px; 
+    }
+    
+
+    nav ul li a.active {
+      text-decoration: underline;
+      color: white;
+    }      
+
+
+    header {
+      background-color: #fbd6df;
+      text-align: center;
+      padding: 60px 20px;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    .section-header {
+      background: linear-gradient(to right, #ffe0ec, #fddde6);
+      padding: 40px 0;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 50px;
+      color: black;
+      margin: 0;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .category {
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 15px;
+      transition: transform 0.3s;
+      background-color: white;
+      border-radius: 10px;
+    }
+
+    .category:hover {
+      transform: scale(1.05);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clothes.html">Clothes</a></li>
+      <li><a href="accessories.html" class="active">Accessories</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="ContactUs.html">Contact</a></li>
+      <li><a href="cart.html">🛒</a></li>
+    </ul>
+  </nav>
+
+  <div class="section-header">
+    <h1>Accessories</h1>
+  </div>
+
+  <div class="categories">
+    <div class="category">
+      <h2>Cups</h2>
+      <a href="Cups1.html">
+        <img src="images/DSC_3242.JPG" alt="Cups" class="product-image">
+      </a>
+      <p>Custom-designed cups for every vibe.</p>
+    </div>
+    <div class="category">
+      <h2>Bracelets</h2>
+      <a href="Bracelets1.html">
+        <img src="images/IMG_6985.jpeg" alt="Bracelets" class="product-image">
+      </a>
+      <p>Handmade bracelets full of love and color.</p>
+    </div>
+    <div class="category">
+      <h2>Coasters</h2>
+      <a href="Coasters1.html">
+        <img src="images/5764FD85-2DFC-4406-B9F2-58E45599F687.JPG" alt="Coasters" class="product-image">
+      </a>
+      <p>Protect your table in style with our coasters.</p>
+    </div>
+
+    <div style="text-align:center; margin: 30px 0;">
+      <img src="videos/Bracelets_on_Park_Bench_Ad.mp4" 
+           alt="Bracelet Ad" 
+           style="max-width: 600px; width: 100%; border-radius: 10px;">
+    </div>
+    
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Pocket Full of Hearts. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

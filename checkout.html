@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Checkout - Pocket Full of Hearts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Arial, sans-serif; background:#fdf2f8; margin:0; color:#000; }
+    nav { background:#000; padding:15px; text-align:center; }
+    nav a { color:#fff; font-weight:bold; margin:0 10px; text-decoration:none; }
+    header { background:linear-gradient(to right,#ffe0ec,#fddde6); text-align:center; padding:50px 20px; }
+    header h1 { font-family:'Great Vibes', cursive; font-size:60px; margin:0; }
+    .container { max-width:900px; margin:40px auto; display:grid; gap:20px; grid-template-columns: 1.2fr .8fr; }
+    .panel { background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,.07); padding:24px; }
+    h2 { margin:0 0 12px; font-size:22px; }
+    .line { display:flex; justify-content:space-between; margin:6px 0; }
+    .total { font-weight:bold; font-size:18px; border-top:1px solid #eee; padding-top:10px; margin-top:10px; }
+    #card-element { padding:12px; border:1px solid #ccc; border-radius:8px; background:#fafafa; }
+    button.pay { width:100%; margin-top:14px; padding:12px; border:none; border-radius:30px; background:#fc94af; color:#fff; font-size:16px; cursor:pointer; }
+    button.pay:disabled{opacity:.6; cursor:not-allowed;}
+    .err { color:#b00020; margin-top:8px; min-height:18px; }
+    .items { max-height:240px; overflow:auto; border:1px solid #eee; border-radius:8px; padding:10px; }
+    .items .row { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+    .items img { width:56px; height:56px; object-fit:cover; border-radius:8px; }
+    .vhs-video { max-width: 1200px; margin: 40px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.vhs-video video {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+    .muted { color:#666; font-size:14px; }
+    @media (max-width:900px){ .container{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="clothes.html">Clothes</a>
+    <a href="accessories.html">Accessories</a>
+    <a href="aboutus.html">About</a>
+    <a href="ContactUs.html">Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+  </nav>
+
+  <header><h1>Checkout</h1></header>
+
+  <div class="container">
+
+    <!-- Shipping Info -->
+    <section class="panel">
+      <h2>Shipping Information</h2>
+      <div style="display:grid; gap:12px;">
+        <input type="text" id="firstName" placeholder="First Name" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+        <input type="text" id="lastName" placeholder="Last Name" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+        <input type="email" id="email" placeholder="Email Address" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+        <input type="tel" id="phone" placeholder="Phone Number" required style="padding:10px; border-radius:8px; border:1px solid #ccc;">
+        <textarea id="address" placeholder="Shipping Address" rows="3" required style="padding:10px; border-radius:8px; border:1px solid #ccc;"></textarea>
+      </div>
+    </section>
+
+    <!-- Payment Methods -->
+    <section class="panel">
+      <h2>Pay by Card</h2>
+      <div id="card-element"></div>
+      <div id="card-errors" class="err"></div>
+      <button id="card-pay" class="pay">Pay <span id="card-amount">$0.00</span></button>
+
+      <div class="muted" style="margin:16px 0 8px;">— or —</div>
+
+      <h2>Pay with PayPal</h2>
+      <div id="paypal-button-container"></div>
+    </section>
+
+    <!-- Order Summary -->
+    <aside class="panel">
+      <h2>Order Summary</h2>
+      <div class="items" id="summary"></div>
+      <div class="line"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+      <div class="line"><span>Shipping</span><span id="shipping">$0.00</span></div>
+      <div class="line"><span>Tax</span><span id="tax">$0.00</span></div>
+      <div class="total"><span>Total</span> <span id="grandTotal">$0.00</span></div>
+      <p class="muted">You’ll receive a confirmation email after payment.</p>
+    </aside>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const summary = document.getElementById("summary");
+    const fmt = n => `$${n.toFixed(2)}`;
+
+    let subtotal = 0;
+    summary.innerHTML = cart.length ? "" : "<p>Your cart is empty.</p>";
+
+    cart.forEach(item => {
+      const lineTotal = (item.price || 0) * (item.quantity || 1);
+      subtotal += lineTotal;
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `
+        <img src="${item.image || 'images/placeholder.jpg'}" alt="${item.name}">
+        <div style="flex:1">
+          <div><strong>${item.name}</strong></div>
+          <div class="muted">Size: ${item.size || '-'} · Color: ${item.color || '-'}</div>
+          <div class="muted">Qty: ${item.quantity || 1}</div>
+        </div>
+        <div>${fmt(lineTotal)}</div>
+      `;
+      summary.appendChild(row);
+    });
+
+    const shipping = subtotal > 75 ? 0 : (cart.length ? 6.99 : 0);
+    const tax = +(subtotal * 0.08).toFixed(2);
+    const grand = +(subtotal + shipping + tax).toFixed(2);
+
+    document.getElementById("subtotal").textContent = fmt(subtotal);
+    document.getElementById("shipping").textContent = fmt(shipping);
+    document.getElementById("tax").textContent = fmt(tax);
+    document.getElementById("grandTotal").textContent = fmt(grand);
+    document.getElementById("card-amount").textContent = fmt(grand);
+
+    const stripe = Stripe("pk_test_YOUR_PUBLISHABLE_KEY");
+    const elements = stripe.elements();
+    const card = elements.create("card");
+    card.mount("#card-element");
+
+    card.on("change", (e) => {
+      document.getElementById("card-errors").textContent = e.error ? e.error.message : "";
+    });
+
+    document.getElementById("card-pay").addEventListener("click", async () => {
+      const btn = document.getElementById("card-pay");
+      btn.disabled = true;
+
+      const customer = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value
+      };
+
+      try {
+        const res = await fetch("https://YOUR_DOMAIN/create-payment-intent", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({
+            amount: Math.round(grand * 100),
+            items: cart,
+            customer
+          })
+        });
+
+        const { clientSecret } = await res.json();
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: { card }
+        });
+
+        if (error) {
+          document.getElementById("card-errors").textContent = error.message;
+          btn.disabled = false;
+          return;
+        }
+
+        if (paymentIntent && paymentIntent.status === "succeeded") {
+          localStorage.removeItem("cart");
+          window.location.href = "thankyou.html";
+        }
+
+      } catch (err) {
+        document.getElementById("card-errors").textContent = "Something went wrong. Please try again.";
+        btn.disabled = false;
+      }
+    });
+
+    paypal.Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: grand.toFixed(2) },
+            description: "Pocket Full of Hearts Order"
+          }]
+        });
+      },
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(details => {
+          localStorage.removeItem("cart");
+          window.location.href = "thankyou.html";
+        });
+      }
+    }).render("#paypal-button-container");
+  </script>
+  <!-- Checkout Page Video Section -->
+<div class="vhs-video" style="max-width: 800px; margin: 40px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.2);">
+  <video autoplay loop muted playsinline>
+    <source src="videos/Seductive_Girls_on_Grass.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+</body>
+</html>

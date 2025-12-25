@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Pocket Full of Hearts - Family Owned Clothing Shop"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <title>Pocket Full of Hearts</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background: linear-gradient(to right, black, black);
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    nav ul li a:hover { 
+      background-color: white; 
+      color: black; 
+      padding: 5px 10px; 
+      border-radius: 5px; 
+    }
+
+    #content {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .category-buttons {
+      margin: 30px 0;
+    }
+
+    .category-buttons a {
+      margin: 10px;
+      display: inline-block;
+    }
+
+    .category-buttons button {
+      background-color: #FC94AF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .category-buttons button:hover {
+      background-color: black;
+    }
+
+    ul {
+      text-align: left;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    a {
+      color: #FC94AF;
+      text-decoration: underline;
+    }
+
+    .slideshow-container {
+      max-width: 1000px;
+      height: 400px;
+      margin: 40px auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .slide {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: opacity 1s ease-in-out;
+      z-index: 1;
+    }
+
+    .slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 0 0 10px 10px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: black;
+      color: white;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #ffe0ec, #ffe0ec);
+      text-align: center;
+      padding: 60px 20px;
+      color: black;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      font-family: 'Great Vibes', cursive;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      background-color: #FC94AF;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background-color: black;
+    }
+
+    .vhs-video {
+      max-width: 1200px;
+      margin: 40px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .vhs-video video {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .mini-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .mini-nav button {
+      background-color: #FC94AF;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .mini-nav button:hover {
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="clothes.html">Clothes</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="ContactUs.html">Contact</a></li>
+      <li><a href="cart.html">🛒</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <h1>Pocket Full of Hearts</h1>
+    <a href="clothes.html"><button>Explore the Collection</button></a>
+  </header>
+
+  <!-- Slideshow -->
+  <div class="slideshow-container">
+    <div class="slide active">
+      <img src="images/20210310_125339.jpg" alt="Popular Item 1">
+      <p class="caption">Cozy Heart Hoodie</p>
+    </div>
+    <div class="slide">
+      <img src="images/20210310_123812.jpg" alt="Popular Item 2">
+      <p class="caption">Signature Bracelet</p>
+    </div>
+    <div class="slide">
+      <img src="images/IMG_6985.jpeg" alt="Popular Item 3">
+      <p class="caption">Tie-Dye Tee</p>
+    </div>
+    <div class="slide">
+      <img src="images/5764FD85-2DFC-4406-B9F2-58E45599F687.JPG" alt="Popular Item 4">
+      <p class="caption">Pink Crewneck</p>
+    </div>
+  </div>
+
+  <!-- VHS Video Section -->
+  <div class="vhs-video">
+    <video autoplay loop muted playsinline>
+      <source src="videos/pocketfullofheartvideo1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+ 
+  <!-- Welcome Content -->
+  
+<!-- Product Gallery Section -->
+<section style="padding: 60px 20px; background-color: #fff; text-align: center;">
+  <h2 style="font-size: 36px; font-family: 'Great Vibes', cursive; margin-bottom: 40px;">Featured Items</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto;">
+    
+    <!-- Top Row -->
+    <div>
+      <img src="images/20210310_123812.jpg" alt="T-Shirt" style="width: 100%; border-radius: 8px;" />
+      <p style="margin: 10px 0; font-weight: bold;">Signature T-Shirt</p>
+      <p style="color: #FC94AF;">$28.00</p>
+    </div>
+    
+    <div>
+      <img src="images/20210310_125339.jpg" alt="Hoodie" style="width: 100%; border-radius: 8px;" />
+      <p style="margin: 10px 0; font-weight: bold;">Cozy Heart Hoodie</p>
+      <p style="color: #FC94AF;">$45.00</p>
+    </div>
+
+    <div>
+      <img src="images/5764FD85-2DFC-4406-B9F2-58E45599F687.JPG" alt="Bracelet" style="width: 100%; border-radius: 8px;" />
+      <p style="margin: 10px 0; font-weight: bold;">Signature Bracelet</p>
+      <p style="color: #FC94AF;">$16.00</p>
+    </div>
+
+    <!-- Bottom Row -->
+    <div>
+      <img src="images/DSC_3242.JPG" alt="Cup" style="width: 100%; border-radius: 8px;" />
+      <p style="margin: 10px 0; font-weight: bold;">Pink Heart Cup</p>
+      <p style="color: #FC94AF;">$14.99</p>
+    </div>
+
+    <div>
+      <img src="images/IMG_3308.JPG" alt="Coaster" style="width: 100%; border-radius: 8px;" />
+      <p style="margin: 10px 0; font-weight: bold;">Love Coaster</p>
+      <p style="color: #FC94AF;">$9.99</p>
+    </div>
+
+    <div>
+      <img src="images/IMG_6987.jpeg" alt="Shorts" style="width: 100%; border-radius: 8px;" />
+      <p style="margin: 10px 0; font-weight: bold;">Pink Lounge Shorts</p>
+      <p style="color: #FC94AF;">$30.00</p>
+    </div>
+  </div>
+</section>
+<!-- Model Video Section -->
+<div class="vhs-video">
+  <video autoplay loop muted playsinline>
+    <source src="videos/Generating_a_Sexy_Catwalk_Video.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+  <footer>
+    <p>&copy; 2025 Pocket Full of Hearts. All rights reserved.</p>
+  </footer>
+
+  <!-- Slideshow Script -->
+  <script>
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slide");
+
+    function showSlides() {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+      }
+
+      slideIndex++;
+      if (slideIndex > slides.length) {
+        slideIndex = 1;
+      }
+
+      slides[slideIndex - 1].classList.add("active");
+      setTimeout(showSlides, 4000); // 4 sec interval
+    }
+
+    showSlides();
+  </script>
+</body>
+</html>
